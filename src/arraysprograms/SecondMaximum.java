@@ -1,5 +1,7 @@
 package arraysprograms;
 
+import java.util.Arrays;
+
 public class SecondMaximum {
     public static void main(String args[]){
         int[] arr = new int[]{13,12,12,10,23};//14,12,13

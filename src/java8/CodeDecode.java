@@ -15,7 +15,7 @@ public class CodeDecode {
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .max(Map.Entry.comparingByValue())
+                .max(Map.Entry.comparingByValue())//.sorted(Collections.reverseOrder(Map.Entry.comparingByValue())
                 .map( Map.Entry::getKey)
                 .orElse('\0');
         System.out.println(ch);
@@ -81,7 +81,7 @@ public class CodeDecode {
                 .findFirst().orElse(null).getValue();
         System.out.println(secondMaxSalary);
 
-        //get the name of employees who has salary max
+        //get the name of employees who has max salary
         Map<String, Integer> map2 = new HashMap<>();
         map2.put("anil", 1000);
         map2.put("ankit", 1200);
@@ -101,6 +101,29 @@ public class CodeDecode {
 
         System.out.println(maxSalaryNames);
 
+        // Duplicate chars and it's count
+        String str1 = "abcabcd"; //a->2, b->2,c->2
+        Map<Character, Long> duplicateCharCount =str1.chars().mapToObj(c -> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue()>1)
+                .collect(Collectors.toMap(entry-> entry.getKey(), entry->entry.getValue()));
+        System.out.println(duplicateCharCount);
+        //First non repeated char
+        String str2= "abcabcd";
+        Map<Character, Integer> firstNonRepeatedChar = new HashMap<>();
+        str2.chars().mapToObj(c-> (char)c)
+                .forEach(c -> firstNonRepeatedChar.put(c, firstNonRepeatedChar.getOrDefault(c, 0)+1));
+        System.out.println(firstNonRepeatedChar);
 
+        //first non repeated character in a String
+        Character firstNonReapeatedChar= str1.chars().mapToObj(c -> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue()==1)
+                .map(Map.Entry::getKey).findFirst().orElse('\0');
+        System.out.println(firstNonReapeatedChar);
     }
 }

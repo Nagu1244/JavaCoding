@@ -22,7 +22,7 @@ public class LongestSubstringWithoutRepeatingChar {
 
         while (right<s.length() && left<=right){
             char currentChar= s.charAt(right);
-            if (charMap.containsKey(currentChar) && charMap.get(currentChar)>=left) {
+            if (charMap.containsKey(currentChar)) {
                 left = charMap.get(currentChar) + 1;
             }
             maxLength = Math.max(maxLength, right-left+1);
