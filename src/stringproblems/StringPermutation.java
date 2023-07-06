@@ -16,21 +16,21 @@ public class StringPermutation {
         return permutation;
     }
 
-    private static void backTrack(char[] charArr, int index, List<String> permutation) {
-        if(index == charArr.length-1){
+    private static void backTrack(char[] charArr, int fixedIndex, List<String> permutation) {
+        if(fixedIndex == charArr.length-1){
           permutation.add(String.valueOf(charArr));
           return;
         }
-        for(int i=index; i<charArr.length;i++){
-          swap(charArr, index, i);
-          backTrack(charArr, index+1, permutation);
-          swap(charArr, index, i);
+        for(int i=fixedIndex; i<charArr.length;i++){
+          swap(charArr, fixedIndex, i);
+          backTrack(charArr, fixedIndex+1, permutation);
+          swap(charArr, fixedIndex, i);
         }
     }
 
-    private static void swap(char[] chars, int start, int i) {
+    private static void swap(char[] chars, int fixedIndex, int i) {
         char temp = chars[i];
-        chars[i] = chars[start];
-        chars[start]= temp;
+        chars[i] = chars[fixedIndex];
+        chars[fixedIndex]= temp;
     }
 }

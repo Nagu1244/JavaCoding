@@ -20,7 +20,7 @@ public class LongestSubstringWithoutRepeatingChar {
         int right = 0;
         Map<Character, Integer> charMap = new HashMap<>();
 
-        while (right<s.length() && left<=right){
+        while (right<s.length() && left<right){
             char currentChar= s.charAt(right);
             if (charMap.containsKey(currentChar)) {
                 left = charMap.get(currentChar) + 1;
