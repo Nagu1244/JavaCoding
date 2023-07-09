@@ -1,58 +1,39 @@
 package designpatterns.structural;
 
-interface LegacyCustomer {
-    String getName();
-    String location();
+import java.math.BigDecimal;
+
+interface PaymentProcessor{
+    void processPayment(BigDecimal amount);
 }
-class LegacyCustomerImpl implements LegacyCustomer {
-    private String name;
-    private String location;
 
-    public LegacyCustomerImpl(String name, String location) {
-        this.name = name;
-        this.location = location;
-    }
+interface ThirdPartyPaymentGateway{
+    void pay();
+}
+
+class LegacyPaymentGateway implements ThirdPartyPaymentGateway{
 
     @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public String location() {
-        return this.location;
+    public void pay() {
+        System.out.println("Payment processed successfully with third party");
     }
 }
 
-interface NewCustomer {
-    String getFullName();
-    String getAddress();
-}
+class PaymentGatewayAdapter implements PaymentProcessor{
+    private ThirdPartyPaymentGateway thirdPartyPaymentGateway;
 
-class AdapterCustomer implements NewCustomer{
- private LegacyCustomer legacyCustomer;
-
-
-    public AdapterCustomer(LegacyCustomer legacyCustomer) {
-        this.legacyCustomer = legacyCustomer;
+    public PaymentGatewayAdapter(ThirdPartyPaymentGateway thirdPartyPaymentGateway) {
+        this.thirdPartyPaymentGateway = thirdPartyPaymentGateway;
     }
 
     @Override
-    public String getFullName() {
-        return legacyCustomer.getName();
-    }
-
-    @Override
-    public String getAddress() {
-        return legacyCustomer.location();
+    public void processPayment(BigDecimal amount) {
+        thirdPartyPaymentGateway.pay();
     }
 }
-
 public class AdapterDesignDemo {
     public static void main(String args[]) {
-        LegacyCustomer legacyCustomer = new LegacyCustomerImpl("Nagaraj Shabad", "Sangareddy");
-        NewCustomer newCustomer = new AdapterCustomer(legacyCustomer);
-        System.out.println(newCustomer.getFullName());
-        System.out.println(newCustomer.getAddress());
+        ThirdPartyPaymentGateway thirdPartyPaymentGateway  = new LegacyPaymentGateway();
+        PaymentProcessor paymentProcessor = new PaymentGatewayAdapter(thirdPartyPaymentGateway);
+        paymentProcessor.processPayment(BigDecimal.valueOf(12000.00));
     }
 }
