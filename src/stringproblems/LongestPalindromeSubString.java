@@ -13,7 +13,7 @@ public class LongestPalindromeSubString {
         for (int i = 0; i < len; i++) {
             // Check for both odd and even length palindromes
             expandFromCenter(s, i, i); // odd length
-            //expandFromCenter(s, i, i + 1); // even length
+            expandFromCenter(s, i, i + 1); // even length
         }
 
         return s.substring(start, start+maxLength); // return the longest palindrome substring
@@ -29,7 +29,7 @@ public class LongestPalindromeSubString {
 
         // Update start and maxLength if a longer palindrome is found
         int currLength = right - left - 1;
-        if (currLength >= maxLength) {
+        if (currLength > maxLength) {
             maxLength = currLength;
             start = left + 1;
         }
@@ -38,7 +38,7 @@ public class LongestPalindromeSubString {
     public static void main(String[] args) {
         LongestPalindromeSubString solution = new LongestPalindromeSubString();
 
-        String input = "babad"; //baab
+        String input = "abba"; //baab
         String longestPalindrome = solution.longestPalindrome(input);
         System.out.println("Longest Palindromic Substring: " + longestPalindrome);
     }

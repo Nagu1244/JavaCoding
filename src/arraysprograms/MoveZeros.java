@@ -20,6 +20,7 @@ public class MoveZeros {
                 left++;
             }
             right++;
+
         }
         return arr;
     }

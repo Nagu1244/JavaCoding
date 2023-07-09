@@ -1,4 +1,4 @@
-package designpatterns;
+package designpatterns.structural;
 
 interface LegacyCustomer {
     String getName();
