@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class TwoSum {
     public static void main(String args[]){
-        int[] arr= new int[]{3,2,4};
+        int[] arr= new int[]{1,2,3,3};
         int targetSum = 6;
         int[] arr1 = twoSum(arr, targetSum);
         System.out.println(Arrays.toString(arr1));
@@ -12,16 +12,11 @@ public class TwoSum {
     }
 
     private static int[] twoSum(int[] arr, int targetSum) {
-        int left = 0;
-        int right = arr.length-1;
-        while (left<right) {
-            int currentSum = arr[left] + arr[right];
-            if(currentSum == targetSum) {
-                return new int[]{left, right};
-            } else if (targetSum>currentSum) {
-                left++;
-            } else {
-                right--;
+        for(int i=0;i<arr.length;i++){
+            for(int j= i+1;j<arr.length;j++){
+                if(arr[i]+arr[j] == targetSum) {
+                    return new int[]{i,j};
+                }
             }
         }
         return new int[]{-1,-1};
