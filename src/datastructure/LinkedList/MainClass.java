@@ -13,5 +13,11 @@ public class MainClass {
         list.displayList();
         list.insertNodeIndex(88, 1);
         list.displayList();
+        list.deleteFirst();
+        list.displayList();
+        list.deleteLast();
+        list.displayList();
+        list.deleteLast();
+        list.displayList();
     }
 }
