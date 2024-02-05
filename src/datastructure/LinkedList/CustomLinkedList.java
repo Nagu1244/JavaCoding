@@ -31,12 +31,40 @@ public class CustomLinkedList {
         size = size+1;
     }
 
+    public void insertLast(int value) {
+        if(tail == null) {
+           insertFirst(value);
+           return;
+        }
+        Node node = new Node(value);
+        tail.next = node;
+        tail = node;
+        size=size+1;
+    }
+
+    public void insertNodeIndex(int value, int index) {
+        if(index == 0) {
+            insertFirst(value);
+            return;
+        } else if(index == size) {
+            insertLast(value);
+            return;
+        }
+        Node temp = head;
+        for(int i=1;i<index;i++) {
+            temp = temp.next;
+        }
+        Node node = new Node(value, temp.next);
+        temp.next = node;
+        size = size+1;
+
+    }
     public void displayList() {
         Node temp = head;
         while (temp != null) {
             System.out.print(temp.value + "->");
             temp = temp.next;
         }
-        System.out.print("END");
+        System.out.println("END");
     }
 }

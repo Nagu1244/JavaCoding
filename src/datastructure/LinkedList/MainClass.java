@@ -9,5 +9,9 @@ public class MainClass {
         list.insertFirst(2);
         list.insertFirst(1);
         list.displayList();
+        list.insertLast(6);
+        list.displayList();
+        list.insertNodeIndex(88, 1);
+        list.displayList();
     }
 }
