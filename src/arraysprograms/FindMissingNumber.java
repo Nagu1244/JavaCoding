@@ -1,24 +1,30 @@
 package arraysprograms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FindMissingNumber {
     public static void main(String args[]) {
-        int arr[] = new int[]{1,2,3,4,5};
-        int missingNumber = findMissingNumber(arr);
+        int arr[] = new int[]{1,3,5,7,9,10};
+        List<Integer> missingNumber = findMissingNumber(arr);
         System.out.println(missingNumber);
     }
 
-    private static int findMissingNumber(int[] arr) {
-        int left = 0;
-        int right =1;
-        while (right<arr.length) {
-           int diff =arr[right]-arr[left];
-           if(arr[left]<arr[right] && diff==1) {
-               left++;
-               right++;
-           } else {
-               return arr[left]+1;
-           }
+    private static List<Integer> findMissingNumber(int[] arr) {
+        List<Integer> list = new ArrayList<>();
+        for(int i=1;i<10;i++) {
+            boolean found = false;
+            for(int n : arr) {
+                if(i==n) {
+                   found = true;
+                   break;
+                }
+            }
+            if(!found) {
+              list.add(i)  ;
+            }
+
         }
-        return 0;
+       return list;
     }
 }
