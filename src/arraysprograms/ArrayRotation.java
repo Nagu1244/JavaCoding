@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ArrayRotation {
     public static void main(String args[]) {
         int[] arr = new int[]{1,2,3,4,5};
-        int k = 6 ;
+        int k = 3 ;
         rotate(arr, k);
         for (int i=0;i<arr.length;i++) {
             System.out.print(arr[i]+ " ");
