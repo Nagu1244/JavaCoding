@@ -102,7 +102,6 @@ public class TechnicalRound {
                  .collect(Collectors.toList());
          System.out.println(ascEmp);
     }
-
     private static List<String> getMaxSalary(List<Employee> value) {
         //find Max Salary from each Department
         double maxSalary = value.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).map(Employee::getSalary).findFirst().get();
