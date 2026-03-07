@@ -94,7 +94,6 @@ public class TechnicalRound {
                 }))));
         System.out.println(empNamesFromDeprtment);
 
-
          List<Employee> salary = empList.stream().filter(emp -> emp.getSalary()>25000.00 && emp.getDepartment().equals("IT"))
                 .collect(Collectors.toList());
          System.out.println(salary);
