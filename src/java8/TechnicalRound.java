@@ -108,6 +108,5 @@ public class TechnicalRound {
         double maxSalary = value.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).map(Employee::getSalary).findFirst().get();
         List<String> maxList = value.stream().filter(emp -> emp.getSalary() == maxSalary).map(Employee::getName).collect(Collectors.toList());
         return maxList;
-
     }
 }
