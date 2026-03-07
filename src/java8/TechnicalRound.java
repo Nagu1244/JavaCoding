@@ -75,10 +75,10 @@ public class TechnicalRound {
         List<Employee> empList = new ArrayList<>();
         empList.add(new Employee(1, "Prashanth", "IT", 45000.00));
         empList.add(new Employee(2, "Airan", "IT", 55000.00));
-        empList.add(new Employee(3, "Vikram", "IT", 55000.00));
+        empList.add(new Employee(3, "Vikram", "IT", 65000.00));
         empList.add(new Employee(4, "Harani", "Accounts", 25000.00));
         empList.add(new Employee(9, "Ravi", "Accounts", 35000.00));
-        empList.add(new Employee(5, "Ravi", "Accounts", 15000.00));
+        empList.add(new Employee(5, "Pranav", "Accounts", 15000.00));
         empList.add(new Employee(6, "Jival", "HR", 45000.00));
         empList.add(new Employee(7, "Vijay", "HR", 25000.00));
         empList.add(new Employee(8, "Prerama", "HR", 40000.00));
@@ -89,11 +89,13 @@ public class TechnicalRound {
         System.out.println("Maximum salary employee names from each Department : " + maxSalaryEmpNames);
 
         //Sort names of an employees in each department in asc order
-        Map<String, List<String>> empNamesFromDeprtment = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment,TreeMap::new, Collectors.mapping(Employee::getName, Collectors.collectingAndThen(Collectors.toList(),
-                list -> {
-                   Collections.sort(list);
-                   return list;
-                }))));
+        Map<String, List<String>> empNamesFromDeprtment = empList.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,
+                        Collectors.collectingAndThen(
+                              Collectors.toList(),
+                              list -> list.stream().sorted(Comparator.comparing(Employee::getName)).map(Employee::getName).collect(Collectors.toList())
+                        )));
         System.out.println("employee names in asc order from each department : " +empNamesFromDeprtment);
 
         //Get Top 2 Highest Paid Employees per Department
@@ -111,9 +113,35 @@ public class TechnicalRound {
                 ));
         System.out.println("Top 2 Highest Paid Employees per Department : " + highestTwoSalaryEmp);
 
-         List<Employee> salary = empList.stream().filter(emp -> emp.getSalary()>25000.00 && emp.getDepartment().equals("IT"))
-                .collect(Collectors.toList());
-         System.out.println(salary);
+        //Get Top 2 Highest Paid Employees per Department if employees having same salary
+
+        Map<String, List<String>> highestEmpNamesDep = empList.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream().collect(Collectors.groupingBy(Employee::getSalary))
+                                        .entrySet().stream().sorted(Map.Entry.<Double, List<Employee>>comparingByKey().reversed())
+                                        .limit(2)
+                                        .flatMap(e -> e.getValue().stream()).map(Employee::getName)
+                                        .toList()
+                        )
+                ));
+        System.out.println("Highest Paid Employees per Department if employees having same salary : " +highestEmpNamesDep);
+
+        Map<String, List<String>> result =
+                empList.stream()
+                        .collect(Collectors.groupingBy(
+                                Employee::getDepartment,
+                                Collectors.collectingAndThen(
+                                        Collectors.toList(),
+                                        list -> list.stream()
+                                                .filter(emp -> emp.getSalary() > 30000)
+                                                .map(Employee::getName)
+                                                .toList()
+                                )
+                        ));
+         System.out.println("Get Employee detail who has salary >30000 : " + result);
 
          List<Employee> ascEmp = empList.stream().sorted(Comparator.comparingDouble(Employee::getSalary).thenComparing(Employee::getName))
                  .collect(Collectors.toList());
