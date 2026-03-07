@@ -17,5 +17,8 @@ public class OptionalDemo {
 
         List<String> list1 =list.stream().map(n -> n+"").filter(number -> number.startsWith("1")).collect(Collectors.toList());
         System.out.println(list1);
+
+        String s1= "Naga";
+        String s2 = "Naga";
     }
 }
