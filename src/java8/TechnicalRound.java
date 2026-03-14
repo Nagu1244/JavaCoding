@@ -74,7 +74,7 @@ public class TechnicalRound {
     public static void main(String args[]) {
         List<Employee> empList = new ArrayList<>();
         empList.add(new Employee(1, "Prashanth", "IT", 45000.00));
-        empList.add(new Employee(2, "Airan", "IT", 55000.00));
+        empList.add(new Employee(2, "Airan", "IT", 65000.00));
         empList.add(new Employee(3, "Vikram", "IT", 65000.00));
         empList.add(new Employee(4, "Harani", "Accounts", 25000.00));
         empList.add(new Employee(9, "Ravi", "Accounts", 35000.00));
