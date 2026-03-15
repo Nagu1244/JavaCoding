@@ -3,6 +3,7 @@ package java8;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CodingPro {
     public static void main(String args[]) {
@@ -56,10 +57,20 @@ public class CodingPro {
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .filter(entry -> entry.getValue() == 2)
+                .filter(entry -> entry.getValue() > 1)
                 .map(Map.Entry::getKey)
                 .findFirst()
                 .orElse(null);
         System.out.println("First repeated char : " +firstRepChar);
+
+        /**
+         * Reverse a String using java8
+         */
+        String str3 = "Shabad";
+        String reverseStr = IntStream.range(0, str3.length())
+                .mapToObj(i -> str3.charAt(str3.length()-1-i))
+                .map(c -> String.valueOf(c))
+                .collect(Collectors.joining());
+        System.out.println(reverseStr);
     }
 }
