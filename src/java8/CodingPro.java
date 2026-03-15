@@ -72,5 +72,28 @@ public class CodingPro {
                 .map(c -> String.valueOf(c))
                 .collect(Collectors.joining());
         System.out.println(reverseStr);
+
+        /**
+         * Find Duplicate characters in String
+         */
+        String str4 = "programming";
+        List<Character> duplicateList = str4.chars().mapToObj(c -> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        System.out.println(duplicateList);
+
+        /**
+         * Second highest number
+         */
+        List<Integer> integerList = List.of(1,2,3,4,5);
+        int secondMaxNumber = integerList.stream().sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst()
+                .orElse(null);
+        System.out.println(secondMaxNumber);
     }
 }
