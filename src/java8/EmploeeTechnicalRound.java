@@ -70,18 +70,18 @@ class Employee{
                 '}';
     }
 }
-public class TechnicalRound {
+public class EmploeeTechnicalRound {
     public static void main(String args[]) {
         List<Employee> empList = new ArrayList<>();
-        empList.add(new Employee(1, "Prashanth", "IT", 45000.00));
+        empList.add(new Employee(1, "Prashanth", "IT", 95000.00));
         empList.add(new Employee(2, "Airan", "IT", 65000.00));
         empList.add(new Employee(3, "Vikram", "IT", 65000.00));
-        empList.add(new Employee(4, "Harani", "Accounts", 25000.00));
+        empList.add(new Employee(4, "Harani", "Accounts", 65000.00));
         empList.add(new Employee(9, "Ravi", "Accounts", 35000.00));
         empList.add(new Employee(5, "Pranav", "Accounts", 15000.00));
-        empList.add(new Employee(6, "Jival", "HR", 45000.00));
+        empList.add(new Employee(6, "Jival", "HR", 65000.00));
         empList.add(new Employee(7, "Vijay", "HR", 25000.00));
-        empList.add(new Employee(8, "Prerama", "HR", 40000.00));
+        empList.add(new Employee(8, "Prerama", "HR", 95000.00));
 
         //Find 1st maximum salary from each department(scenario:two employees having same salary)
         Map<String, List<Employee>> depGrpEmp = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
@@ -146,6 +146,45 @@ public class TechnicalRound {
          List<Employee> ascEmp = empList.stream().sorted(Comparator.comparingDouble(Employee::getSalary).thenComparing(Employee::getName))
                  .collect(Collectors.toList());
          System.out.println(ascEmp);
+
+        /**
+         * Find maximum salary of an employee from each department:
+         *
+         */
+
+       Map<String, Map<Double, List<String>>> maxSalaryEmp = empList.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getDepartment,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> {
+                                    double maxSalary = list.stream()
+                                            .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                                            .map(Employee::getSalary)
+                                            .findFirst()
+                                            .get();
+                                    return list.stream()
+                                            .filter(emp -> emp.getSalary() == maxSalary)
+                                            .collect(Collectors.groupingBy(
+                                                    Employee::getSalary,
+                                                    Collectors.mapping(Employee::getName, Collectors.toList())
+                                            ));
+                                }
+                        )));
+
+       System.out.println("Maximum salary emp from each department : " + maxSalaryEmp);
+       /*
+        * Maximum salary emp from organization, very important and confusion pls focus more on this
+        */
+
+       double maxSalary = empList.stream()
+               .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+               .map(Employee::getSalary)
+               .findFirst()
+               .orElse(null);
+       List<String> maxSalaryEmpNames1 = empList.stream().filter(emp -> emp.getSalary() == maxSalary)
+               .map(Employee::getName).collect(Collectors.toList());
+       System.out.println(maxSalaryEmpNames1);
     }
     private static List<String> getMaxSalary(List<Employee> value) {
         //find Max Salary from each Department
@@ -153,4 +192,5 @@ public class TechnicalRound {
         List<String> maxList = value.stream().filter(emp -> emp.getSalary() == maxSalary).map(Employee::getName).collect(Collectors.toList());
         return maxList;
     }
+
 }
