@@ -185,6 +185,14 @@ public class EmploeeTechnicalRound {
        List<String> maxSalaryEmpNames1 = empList.stream().filter(emp -> emp.getSalary() == maxSalary)
                .map(Employee::getName).collect(Collectors.toList());
        System.out.println(maxSalaryEmpNames1);
+
+       //find the sum of all salries in org
+        double salarySum = empList.stream().collect(Collectors.summingDouble(Employee::getSalary));
+        System.out.println(salarySum);
+
+        //find sum of salary for each department
+        Map<String, Double> sumEachDeprt = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.summingDouble(Employee::getSalary)));
+        System.out.println(sumEachDeprt);
     }
     private static List<String> getMaxSalary(List<Employee> value) {
         //find Max Salary from each Department
