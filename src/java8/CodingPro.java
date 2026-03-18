@@ -67,7 +67,7 @@ public class CodingPro {
          * Reverse a String using java8
          * spaces considered as a character
          */
-        String str3 = "Shabad Nagaraju";
+        String str3 = "Java program";
         String reverseStr = IntStream.range(0, str3.length())
                 .mapToObj(i -> str3.charAt(str3.length()-1-i))
                 .map(c -> String.valueOf(c))
