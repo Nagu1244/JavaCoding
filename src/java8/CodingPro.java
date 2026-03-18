@@ -65,13 +65,29 @@ public class CodingPro {
 
         /**
          * Reverse a String using java8
+         * spaces considered as a character
          */
-        String str3 = "Shabad";
+        String str3 = "Shabad Nagaraju";
         String reverseStr = IntStream.range(0, str3.length())
                 .mapToObj(i -> str3.charAt(str3.length()-1-i))
                 .map(c -> String.valueOf(c))
                 .collect(Collectors.joining());
         System.out.println(reverseStr);
+
+        //We can use reduce method also to reverse the string
+        String reversed = Arrays.stream(str3.split(""))
+                .reduce("", (a, b) -> b + a);
+        System.out.println(reversed);
+
+        /**
+         * Reverse a word in a sentence, o/p->language Programming Java
+         */
+        String str11 = "Java Programming language";
+        String[] words = str11.split(" ");
+        String reverseWordsSentence = IntStream.range(0, words.length)
+                .mapToObj(i -> words[words.length-1-i])
+                .collect(Collectors.joining(" "));
+        System.out.println(reverseWordsSentence);
 
         /**
          * Find Duplicate characters in String
@@ -95,5 +111,7 @@ public class CodingPro {
                 .findFirst()
                 .orElse(null);
         System.out.println(secondMaxNumber);
+
+
     }
 }
