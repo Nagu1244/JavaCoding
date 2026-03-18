@@ -65,7 +65,7 @@ public class CodingPro {
 
         /**
          * Reverse a String using java8
-         * spaces considered as a character
+         * spaces considered as a character o/p->margorp avaJ
          */
         String str3 = "Java program";
         String reverseStr = IntStream.range(0, str3.length())
@@ -88,6 +88,15 @@ public class CodingPro {
                 .mapToObj(i -> words[words.length-1-i])
                 .collect(Collectors.joining(" "));
         System.out.println(reverseWordsSentence);
+
+        /**
+         * Reverse each word but keep order :o/p->avaJ gnimmargorp egaugnal
+         */
+        String str6 = "Java programming language";
+        String revSentStr = Arrays.stream(str6.split(" "))
+                .map(word -> new StringBuilder(word).reverse().toString())
+                .collect(Collectors.joining(" "));
+        System.out.println(revSentStr);
 
         /**
          * Find Duplicate characters in String
