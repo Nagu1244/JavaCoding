@@ -70,7 +70,7 @@ class Employee{
                 '}';
     }
 }
-public class EmploeeTechnicalRound {
+public class EmployeeTechnicalRound {
     public static void main(String args[]) {
         List<Employee> empList = new ArrayList<>();
         empList.add(new Employee(1, "Prashanth", "IT", 95000.00));
