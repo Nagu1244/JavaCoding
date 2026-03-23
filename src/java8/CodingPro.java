@@ -30,8 +30,8 @@ public class CodingPro {
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey).get();
+                .sorted(Map.Entry.<Character, Long>comparingByValue().reversed())
+                .map(Map.Entry::getKey).findFirst().get();
         System.out.println("The first max repeated character : " + firstMostRepeatedChar);
 
         /**
