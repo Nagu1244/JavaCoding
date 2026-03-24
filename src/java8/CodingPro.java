@@ -121,6 +121,10 @@ public class CodingPro {
                 .orElse(null);
         System.out.println(secondMaxNumber);
 
+        int listSum = integerList.stream()
+                .mapToInt(Integer::intValue).sum();
+        System.out.println(listSum);
+
 
     }
 }
