@@ -81,7 +81,7 @@ public class EmployeeTechnicalRound {
         empList.add(new Employee(5, "Pranav", "Accounts", 15000.00));
         empList.add(new Employee(6, "Jival", "HR", 65000.00));
         empList.add(new Employee(7, "Vijay", "HR", 25000.00));
-        empList.add(new Employee(8, "Prerama", "HR", 95000.00));
+        empList.add(new Employee(8, "Prerana", "HR", 95000.00));
 
         //Find 1st maximum salary from each department(scenario:two employees having same salary)
         Map<String, List<Employee>> depGrpEmp = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
@@ -113,7 +113,7 @@ public class EmployeeTechnicalRound {
                 ));
         System.out.println("Top 2 Highest Paid Employees per Department : " + highestTwoSalaryEmp);
 
-        //Get Top 2 Highest Paid Employees per Department if employees having same salary
+        //Get Top 1 Highest Paid Employees per Department
 
         Map<String, List<String>> highestEmpNamesDep = empList.stream()
                 .collect(Collectors.groupingBy(
@@ -122,12 +122,12 @@ public class EmployeeTechnicalRound {
                                 Collectors.toList(),
                                 list -> list.stream().collect(Collectors.groupingBy(Employee::getSalary))
                                         .entrySet().stream().sorted(Map.Entry.<Double, List<Employee>>comparingByKey().reversed())
-                                        .limit(2)
+                                        .limit(1)
                                         .flatMap(e -> e.getValue().stream()).map(Employee::getName)
                                         .toList()
                         )
                 ));
-        System.out.println("Highest Paid Employees per Department if employees having same salary : " +highestEmpNamesDep);
+        System.out.println("Top 1 Highest Paid Employees per Department: " +highestEmpNamesDep);
 
         Map<String, List<String>> result =
                 empList.stream()
@@ -149,7 +149,7 @@ public class EmployeeTechnicalRound {
 
         /**
          * Find maximum salary of an employee from each department:
-         *
+         * if more than one employee having same salary in each department, then groupBy salary
          */
 
        Map<String, Map<Double, List<String>>> maxSalaryEmp = empList.stream()
@@ -159,7 +159,7 @@ public class EmployeeTechnicalRound {
                                 Collectors.toList(),
                                 list -> {
                                     double maxSalary = list.stream()
-                                            .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                                            .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
                                             .map(Employee::getSalary)
                                             .findFirst()
                                             .get();
