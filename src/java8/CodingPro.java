@@ -125,6 +125,16 @@ public class CodingPro {
                 .mapToInt(Integer::intValue).sum();
         System.out.println(listSum);
 
+        List<Integer> intList = Arrays.asList(22,12,15,124,34,9);
+        //get the numbers which starts from 1
+        List<Integer> listWith1 = intList.stream().map(n -> n + "").filter(s -> s.startsWith("1")).map(Integer::valueOf).collect(Collectors.toList());
+        System.out.println(listWith1);
+
+        //get common elements from list
+        List<String> list1 = Arrays.asList("A", "B", "C");
+        List<String> list2 = Arrays.asList("D", "A", "C");
+        List<String> list3 = list1.stream().filter(s -> list2.contains(s)).collect(Collectors.toList());
+        System.out.println(list3);
 
     }
 }

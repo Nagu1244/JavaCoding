@@ -37,7 +37,7 @@ public class CodeDecode {
         //First max value
         int firstMax = Arrays.stream(arr)
                 .boxed()
-                .sorted((n1, n2) -> n2.compareTo(n1))
+                .sorted(Comparator.reverseOrder())
                 .findFirst()
                 .orElse(null);
         System.out.println(firstMax);
