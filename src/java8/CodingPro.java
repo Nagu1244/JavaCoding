@@ -136,5 +136,20 @@ public class CodingPro {
         List<String> list3 = list1.stream().filter(s -> list2.contains(s)).collect(Collectors.toList());
         System.out.println(list3);
 
+        /**
+         * Find longest string in list
+         */
+        List<String> list = Arrays.asList("Java","SpringBoot","Microservices");
+        String longestStr = list.stream().sorted(Comparator.comparingInt(String::length).reversed()).findFirst().orElse(null);
+        System.out.println(longestStr);
+
+        /**
+         * find duplicate elements in list
+         * remove deplicate elements just remove ! in !hashset.add
+         */
+        List<Integer> listInt = Arrays.asList(12,12,23,13,23);
+        Set<Integer> hashSet = new HashSet<>();
+        List<Integer> duplicateNumbers = listInt.stream().filter( n -> !hashSet.add(n)).collect(Collectors.toList());
+        System.out.println(duplicateNumbers);
     }
 }

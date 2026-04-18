@@ -29,7 +29,7 @@ public class CodeDecode {
         int[] arr = new int[]{12, 1, 20, 23, 34};
         int secondMaxValue = Arrays.stream(arr)
                 .boxed()
-                .sorted((a1, a2) -> a2.compareTo(a1))
+                .sorted(Collections.reverseOrder())
                 .skip(1)
                 .findFirst()
                 .orElse(null);
