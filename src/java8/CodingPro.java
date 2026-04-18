@@ -80,6 +80,19 @@ public class CodingPro {
         System.out.println(reversed);
 
         /**
+         * Find Duplicate characters in String
+         */
+        String str4 = "programming";
+        List<Character> duplicateList = str4.chars().mapToObj(c -> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        System.out.println(duplicateList);
+
+        /**
          * Reverse a word in a sentence, o/p->language Programming Java
          */
         String str11 = "Java Programming language";
@@ -97,19 +110,6 @@ public class CodingPro {
                 .map(word -> new StringBuilder(word).reverse().toString())
                 .collect(Collectors.joining(" "));
         System.out.println(revSentStr);
-
-        /**
-         * Find Duplicate characters in String
-         */
-        String str4 = "programming";
-        List<Character> duplicateList = str4.chars().mapToObj(c -> (char)c)
-                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() > 1)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-        System.out.println(duplicateList);
 
         /**
          * Second highest number
