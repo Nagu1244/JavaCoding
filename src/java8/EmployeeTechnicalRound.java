@@ -364,8 +364,8 @@ public class EmployeeTechnicalRound {
     private static List<String> getMaxSalary(List<Employee> value) {
         //find Max Salary from each Department
         double maxSalary = value.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).map(Employee::getSalary).findFirst().get();
-        List<String> maxList = value.stream().filter(emp -> emp.getSalary() == maxSalary).map(Employee::getName).collect(Collectors.toList());
-        return maxList;
+        List<String> maxSalartEmp = value.stream().filter(emp -> emp.getSalary() == maxSalary).map(Employee::getName).collect(Collectors.toList());
+        return maxSalartEmp;
     }
 
 }
