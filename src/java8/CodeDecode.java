@@ -39,7 +39,7 @@ public class CodeDecode {
                 .boxed()
                 .sorted(Comparator.reverseOrder())
                 .findFirst()
-                .orElse(null);
+                .orElseGet(null);
         System.out.println(firstMax);
 
         //remove duplicates from list
@@ -123,7 +123,7 @@ public class CodeDecode {
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() == 1)
-                .map(Map.Entry::getKey).findFirst().orElse('\0');
+                .map(Map.Entry::getKey).findFirst().get();
         System.out.println(firstNonReapeatedChar);
     }
 }

@@ -171,5 +171,48 @@ public class CodingPro {
          */
         Map<Boolean, List<Integer>> evenOddList = list4.stream().collect(Collectors.partitioningBy(n -> n % 2 == 0));
         System.out.println(evenOddList);
+
+        /**
+         * Optional class
+         * even if optional is not an empty orElse always executes
+         */
+        Optional<String> opt = Optional.of("Java");
+        String strValue = opt.orElse(fetchDefaultValue());
+        System.out.println(strValue);
+
+        /**
+         * orElseGet executes only if the optional is empty
+         */
+        Optional<String> opt2 = Optional.of("Java");
+        String strValue2 = opt2.orElseGet(() -> fetchDefaultValue());
+        System.out.println(strValue2);
+        /**
+         * Optional.of vs Optional.ofNullable
+         * Optional.of() -> use when the optional should not be null, if it's null will get NPE
+         * Optional.ofNullable() -> if your not sure whether object value is null ot not, if null will return Optional.empty object
+         */
+        Optional opt3 =  Optional.ofNullable(null);
+        System.out.println(opt3);
+        /**
+         * Exception bz , it's an empty String
+         */
+        /*Optional<String> opt4 = Optional.empty();
+        System.out.println(opt4.get());*/
+
+        /**
+         * map vs FlatMap in Optional
+         */
+        Optional<String> opt5 = Optional.ofNullable("Java");
+        Optional<String> updatedOpt5 = opt5.map( s -> s.toUpperCase());
+        System.out.println(updatedOpt5);
+
+        System.out.println(opt5.map(s -> Optional.of(s.toUpperCase())));
+        System.out.println(opt5.flatMap(s -> Optional.of(s.toUpperCase())));
+
+    }
+
+    private static String fetchDefaultValue() {
+        System.out.println("default string");
+        return "default";
     }
 }
