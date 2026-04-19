@@ -151,5 +151,25 @@ public class CodingPro {
         Set<Integer> hashSet = new HashSet<>();
         List<Integer> duplicateNumbers = listInt.stream().filter( n -> !hashSet.add(n)).collect(Collectors.toList());
         System.out.println(duplicateNumbers);
+
+        /**
+         * Find the sum of elements
+         */
+        List<Integer> list4 = Arrays.asList(1,2,3,4,5,6);
+        int sumList = list4.stream()
+                .mapToInt(Integer::intValue).sum();
+        System.out.println(sumList);
+
+        /**
+         * find sum of even numbers
+         */
+        int evenNumbersSum = list4.stream().filter(n -> n%2 == 0).mapToInt(Integer::intValue).sum();
+        System.out.println(evenNumbersSum);
+
+        /**
+         * Partitioning even and odd
+         */
+        Map<Boolean, List<Integer>> evenOddList = list4.stream().collect(Collectors.partitioningBy(n -> n % 2 == 0));
+        System.out.println(evenOddList);
     }
 }
