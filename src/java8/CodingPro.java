@@ -64,6 +64,19 @@ public class CodingPro {
         System.out.println("First repeated char : " +firstRepChar);
 
         /**
+         * Find Duplicate characters in String
+         */
+        String str4 = "programming";
+        List<Character> duplicateList = str4.chars().mapToObj(c -> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        System.out.println(duplicateList);
+
+        /**
          * Reverse a String using java8
          * spaces considered as a character o/p->margorp avaJ
          */
@@ -80,19 +93,6 @@ public class CodingPro {
         System.out.println(reversed);
 
         /**
-         * Find Duplicate characters in String
-         */
-        String str4 = "programming";
-        List<Character> duplicateList = str4.chars().mapToObj(c -> (char)c)
-                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() > 1)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-        System.out.println(duplicateList);
-
-        /**
          * Reverse a word in a sentence, o/p->language Programming Java
          */
         String str11 = "Java Programming language";
@@ -106,7 +106,8 @@ public class CodingPro {
          * Reverse each word but keep order :o/p->avaJ gnimmargorp egaugnal
          */
         String str6 = "Java programming language";
-        String revSentStr = Arrays.stream(str6.split(" "))
+        String[] arrStr = str6.split(" ");
+        String revSentStr = Arrays.stream(arrStr)
                 .map(word -> new StringBuilder(word).reverse().toString())
                 .collect(Collectors.joining(" "));
         System.out.println(revSentStr);
@@ -120,6 +121,20 @@ public class CodingPro {
                 .findFirst()
                 .orElse(null);
         System.out.println(secondMaxNumber);
+
+        /**
+         * Second smallest number
+         */
+        int secondSmalestNumber = integerList.stream().sorted().skip(1).findFirst().get();
+        System.out.println(secondSmalestNumber);
+        /**
+         * Second max from array
+         */
+        int[] arr = new int[]{12, 1, 20, 23, 34};
+        int secondMax = Arrays.stream(arr)
+                .boxed()
+                .sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+        System.out.println(secondMax);
 
         int listSum = integerList.stream()
                 .mapToInt(Integer::intValue).sum();
